@@ -17,6 +17,7 @@ def move_copy():
     print("Moving files . . . ")
     global source_dir
     source_dir = endSlashAppender(source_dir)
+    getFilenameFromSource()
     for file in file_names:
         source_file = source_dir+file
         destination_file = destination_dir + file
@@ -26,8 +27,10 @@ def move_copy():
 def getFilenameFromSource():
 
     for file in os.listdir(source_dir):
-        if file.endswith(extensions) and file.find(filename_key):
-            file_names.append(file)
+        print("Process file: ", file)
+        if file.endswith(extensions):
+            if (filename_key != "" and file.find(filename_key)) or filename_key == "":
+                file_names.append(file)
     print("Files to move: ", len(file_names))
 
 def fileToFolderPacker():
@@ -49,3 +52,8 @@ parser.add_argument('-p', action="store", dest="files_in_folders", default=0, ty
 
 args = parser.parse_args()
 print(args)
+
+source_dir = args.source_dir
+destination_dir = args.destination_dir
+
+move_copy()
