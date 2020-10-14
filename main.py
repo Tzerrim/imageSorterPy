@@ -80,4 +80,3 @@ if source_dir != "" and destination_dir != "":
     move_copy()
 else:
     print("Missing source and/or destination directories path")
-
